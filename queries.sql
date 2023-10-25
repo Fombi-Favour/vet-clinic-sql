@@ -60,8 +60,17 @@ SELECT a.name, v.date_of_visit FROM animals a JOIN visits v ON v.animal_id = a.i
 SELECT a.name, count(v.id) AS visit FROM animals a JOIN visits v ON v.animal_id = a.id GROUP BY a.name ORDER BY count(v.id) DESC;
 SELECT a.name FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id WHERE ve.name = 'Maisy Smith' ORDER BY v.date_of_visit ASC;
 SELECT a.name, ve.name, v.date_of_visit FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id ORDER BY v.date_of_visit DESC;
+
 SELECT count(v.id) from visits v
 JOIN animals a ON v.animal_id = a.id
 JOIN vets ve ON v.vet_id = ve.id
 LEFT JOIN specializations spe ON spe.vets_id = ve.id AND spe.specie_id = a.species_id
 WHERE spe.id IS NULL;
+
+SELECT s.name FROM animals a
+JOIN species s ON a.species_id = s.id
+JOIN visits v ON v.animal_id = a.id
+JOIN vets ve ON ve.id = v.vet_id
+where ve.name = 'Maisy Smith'
+GROUP BY s.name
+ORDER BY count(a.id) DESC;
