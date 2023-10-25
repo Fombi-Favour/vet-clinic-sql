@@ -38,7 +38,7 @@ UPDATE animals SET owner_id=(SELECT id from owners WHERE full_name='Dean Winches
 INSERT INTO vets (name, date_of_graduation, age) VALUES
 ('William Tatcher', '04-23-2000', 45),
 ('Maisy Smith', '01-17-2019', 26),
-('Stephanie Mendez', '05-04-1981', 46),
+('Stephanie Mendez', '05-04-1981', 64),
 ('Jack Harkness', '06-08-2008', 38);
 
 -- inserting data in "specializations" table
