@@ -50,3 +50,18 @@ SELECT s.name, count(a.id) AS animal_count FROM animals a JOIN species s on a.sp
 SELECT a.name from animals a JOIN species s ON a.species_id = s.id JOIN owners o ON a.owner_id = o.id WHERE s.name = 'Digimon' AND o.full_name = 'Jennifer Orwell';
 SELECT a.name FROM animals a JOIN owners o ON a.owner_id = o.id WHERE o.full_name = 'Dean Winchester' AND a.escape_attempts = 0;
 SELECT o.full_name AS owner_name, count(a.id) FROM owners o JOIN animals a ON o.id = a.owner_id GROUP BY o.full_name ORDER BY count(a.id) DESC;
+
+
+-- queries for "vists"
+SELECT a.name FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id WHERE ve.name = 'William Tatcher' ORDER BY v.date_of_visit DESC;
+SELECT count(v.animal_id) FROM visits v JOIN vets ve ON ve.id = v.vet_id WHERE ve.name = 'Stephanie Mendez';
+SELECT ve.name, s.name from vets ve LEFT JOIN specializations spe ON spe.vets_id = ve.id LEFT JOIN species s ON s.id = spe.specie_id;
+SELECT a.name, v.date_of_visit FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id WHERE ve.name = 'Stephanie Mendez' AND v.date_of_visit BETWEEN '04-01-2020' AND '08-30-2020';
+SELECT a.name, count(v.id) AS visit FROM animals a JOIN visits v ON v.animal_id = a.id GROUP BY a.name ORDER BY count(v.id) DESC;
+SELECT a.name FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id WHERE ve.name = 'Maisy Smith' ORDER BY v.date_of_visit ASC;
+SELECT a.name, ve.name, v.date_of_visit FROM animals a JOIN visits v ON v.animal_id = a.id JOIN vets ve ON ve.id = v.vet_id ORDER BY v.date_of_visit DESC;
+SELECT count(v.id) from visits v
+JOIN animals a ON v.animal_id = a.id
+JOIN vets ve ON v.vet_id = ve.id
+LEFT JOIN specializations spe ON spe.vets_id = ve.id AND spe.specie_id = a.species_id
+WHERE spe.id IS NULL;
